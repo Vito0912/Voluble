@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "Voluble",
+    "version": "1.1.2",
+  
+    "description": "Voluble is a handy extension that adds a volume control to the Audible web player ",
+
+    "permissions": ["activeTab"],
+
+    "icons": {
+      "48": "icons/logo-48.png",
+      "96": "icons/logo-96.png"
+    },
+
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "voluble@vito"
+      }
+    },
+
+    "content_scripts": [
+      {
+        "matches": ["*://*.audible.com/webplayer*", "*://*.audible.de/webplayer*"],
+        "js": ["control.js"]
+      }
+    ]
+  }
+  
