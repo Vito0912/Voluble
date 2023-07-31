@@ -31,21 +31,27 @@ text.classList.add('bc-text', 'bc-size-mini', 'bc-color-secondary');
 
 const userLang = navigator.language || navigator.userLanguage; 
 
-const volumeNames = ['Lautstärke', 'Volume']
+const volumeNames = ['Lautstärke', 'Volume', '音量', 'Volumen']
 let volumeName;
 
 switch (userLang) {
     case 'de':
-        volumeName = volumeNames[0]
+        volumeName = volumeNames[0];
         break;
     case 'en':
-        volumeName = volumeNames[1]
+        volumeName = volumeNames[1];
         break;
     case 'fr':
-        volumeName = volumeNames[1]
+        volumeName = volumeNames[1];
+        break;
+    case 'jp':
+        volumeName = volumeNames[2];
+        break;
+    case 'es':
+        volumeName = volumeNames[3];
         break;
     default:
-        volumeName = volumeNames[1]
+        volumeName = volumeNames[1];
         break;
 }
 
@@ -155,7 +161,12 @@ menuArea.appendChild(volumeControl);
 
 // Change the name of playback speed
 let index = 0
-const searchTexts = ['Abspielgeschwindigkeit', 'Narration Speed', 'Vitesse de narration'];
+
+/* This changes the names of long words.
+ * Because the column gets thighter the texts get pushed together. So long words do not make a line break and clip into each other.
+ * The commented Arrays are for long words that are not that beautiful even thought they would fit. Currently they are disabled
+*/
+const searchTexts = ['Abspielgeschwindigkeit'] //['Abspielgeschwindigkeit', 'Narration Speed', 'Vitesse de narration', 'Velocidad de la narración'];
 let spans = document.querySelectorAll('span');
 let span;
 for (let i = 0; i < spans.length; i++) {
@@ -168,7 +179,7 @@ for (let i = 0; i < spans.length; i++) {
     if(index !== 0) break;
 }
 
-const speedNames = ['Geschwindigkeit', 'Speed', 'Vitesse']
+const speedNames = ['Geschwindigkeit'] //['Geschwindigkeit', 'Speed', 'Vitesse', 'Velocidad']
 
 if(span != undefined) span.textContent = speedNames[index]
 
