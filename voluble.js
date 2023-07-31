@@ -41,6 +41,9 @@ switch (userLang) {
     case 'en':
         volumeName = volumeNames[1]
         break;
+    case 'fr':
+        volumeName = volumeNames[1]
+        break;
     default:
         volumeName = volumeNames[1]
         break;
@@ -64,7 +67,7 @@ let sliderContainer = document.createElement('div');
 sliderContainer.style.display = 'none';
 sliderContainer.style.flexDirection = 'column';
 sliderContainer.style.alignItems = 'center';
-sliderContainer.style.transform = 'rotate(-90deg) translateX(120%) translateY(-12.5px)';
+sliderContainer.style.transform = 'rotate(-90deg) translateX(120%) translateY(-25%)';
 sliderContainer.style.width = '100px'
 sliderContainer.style.height= '40px'
 sliderContainer.style.cursor = 'pointer';
@@ -83,7 +86,6 @@ style.textContent = `
     height:9px;
     width:9px;
     -webkit-appearance:none;
-    margin-top:-3px
   }
 
   .volume-range[type=range]::-ms-thumb {
@@ -96,7 +98,6 @@ style.textContent = `
     height:9px;
     width:9px;
     -webkit-appearance:none;
-    margin-top:-3px
   }
 `;
 document.head.appendChild(style);
@@ -108,25 +109,25 @@ slider.min = 0;
 slider.max = 100;
 slider.value = document.getElementsByTagName("audio")[0].volume * 100;
 slider.style.margin = 'auto';
-slider.style.width = '120px'
+slider.style.width = '100px'
 slider.style.cursor = 'pointer'
 
-//Addint the class for changing thumb
+//Add the class for changing thumb
 slider.classList.add('volume-range')
 
-// Ändere die Farbe des Sliders
+// Change Color of slider
 slider.style.backgroundColor = '#f7991c';
 
-// Für WebKit-basierte Browser (z. B. Chrome)
+// For WebKit-Based Browser
 slider.style.webkitAppearance = 'none';
 
-// Für Firefox
+// For Firefox
 slider.style.mozAppearance = 'none';
 
-// Füge einen Schatten zum Slider hinzu
+// Add Shadow to slider
 slider.style.boxShadow = 'rgba(0, 0, 0, 0.3) 0px 1px 3px';
 
-slider.style.height = '2.1px';
+slider.style.height = '2px';
 slider.oninput = function() {
     // Update the volume of the audio element when the slider is moved
     document.getElementsByTagName("audio")[0].volume = this.value / 100;
@@ -154,20 +155,20 @@ menuArea.appendChild(volumeControl);
 
 // Change the name of playback speed
 let index = 0
-const searchTexts = ['Abspielgeschwindigkeit', 'Narration Speed'];
+const searchTexts = ['Abspielgeschwindigkeit', 'Narration Speed', 'Vitesse de narration'];
 let spans = document.querySelectorAll('span');
 let span;
 for (let i = 0; i < spans.length; i++) {
-    searchTexts.forEach((word) => {
+    searchTexts.forEach((word, j) => {
         if (spans[i].textContent === word) {
             span = spans[i];
-            index = i;
+            index = j;
         }
     });
     if(index !== 0) break;
 }
 
-const speedNames = ['Geschwindigkeit', 'Speed']
+const speedNames = ['Geschwindigkeit', 'Speed', 'Vitesse']
 
 if(span != undefined) span.textContent = speedNames[index]
 
@@ -178,6 +179,7 @@ for (let i = 0; i < elements.length; i++) {
     // Removed the col class
     element.classList.remove('bc-col-4')
 
+    // Add it to a smaller scale to fit in volume control
     element.classList.add('bc-col-3')
 }
 
@@ -212,32 +214,32 @@ function updateSliderValue(event) {
 // Add event listeners to the slider container for mousedown and touchstart events
 sliderContainer.addEventListener('touchstart', updateSliderValue);
 
-// Füge einen Flag hinzu, um zu verfolgen, ob die Maustaste gedrückt ist
+// Add a flag to track whether the mouse button is pressed
 let isMouseDown = false;
 
-// Füge einen Event-Listener zum Dokument für Mousemove-Events hinzu
+// Add an event listener to the document for Mousemove events
 document.addEventListener('mousemove', function(event) {
-    // Verhindere, dass das Event weitergeleitet wird
+    // Prevent the event from being propagated
     event.stopPropagation();
 
-    // Aktualisiere den Slider nur, wenn die Maustaste gedrückt ist
+    // Update the slider only if the mouse button is pressed
     if (isMouseDown) {
         updateSliderValue(event);
     }
 });
 
-// Füge einen Event-Listener zum Dokument für Mouseup-Events hinzu
+// Add an event listener to the document for Mouseup events
 document.addEventListener('mouseup', function(event) {
-    // Verhindere, dass das Event weitergeleitet wird
+    // Prevent the event from being propagated
     event.stopPropagation();
 
-    // Setze den isMouseDown-Flag auf false, wenn die Maustaste losgelassen wird
+    // Set the isMouseDown flag to false when the mouse button is released
     isMouseDown = false;
 });
 
-// Aktualisiere den Event-Listener auf dem Slider-Container, um den isMouseDown-Flag auf true zu setzen, wenn die Maustaste gedrückt wird
+// Update the event listener on the slider container to set the isMouseDown flag to true when the mouse button is pressed
 sliderContainer.addEventListener('mousedown', function(event) {
-    // Verhindere, dass das Event weitergeleitet wird
+    // Prevent the event from being propagated
     event.stopPropagation();
 
     isMouseDown = true;

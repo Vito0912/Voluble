@@ -8,8 +8,8 @@
     "permissions": ["activeTab"],
 
     "icons": {
-      "48": "icons/logo-48.png",
-      "96": "icons/logo-96.png"
+      "48": "icons/logo2-48.png",
+      "96": "icons/logo2-96.png"
     },
 
     "browser_specific_settings": {
@@ -20,8 +20,8 @@
 
     "content_scripts": [
       {
-        "matches": ["*://*.audible.com/webplayer*", "*://*.audible.de/webplayer*"],
-        "js": ["control.js"]
+        "matches": ["*://*.audible.com/webplayer*", "*://*.audible.de/webplayer*", "*://*.audible.net/webplayer*", "*://*.audible.fr/webplayer*"],
+        "js": ["voluble.js"]
       }
     ]
   }
