@@ -28,35 +28,51 @@ let text = document.createElement('span');
 // Add classes to the text for styling
 text.classList.add('bc-text', 'bc-size-mini', 'bc-color-secondary');
 
+// Gets an array of languages
+let languages = navigator.languages;
 
-const userLang = navigator.language || navigator.userLanguage; 
+// If no array gets returned use language and userLanguage as fallback
+if(languages == undefined || languages.length <= 0) languages = [navigator.language || navigator.userLanguage]
 
-const volumeNames = ['Lautstärke', 'Volume', '音量', 'Volumen']
+const volumeNames = ['Lautstärke', 'Volume', '音量', 'Volumen'];
+
 let volumeName;
 
-switch (userLang) {
-    case 'de':
-        volumeName = volumeNames[0];
-        break;
-    case 'en':
-        volumeName = volumeNames[1];
-        break;
-    case 'fr':
-        volumeName = volumeNames[1];
-        break;
-    case 'jp':
-        volumeName = volumeNames[2];
-        break;
-    case 'es':
-        volumeName = volumeNames[3];
-        break;
-    default:
-        volumeName = volumeNames[1];
-        break;
+for (const language of languages) {
+    switch (language) {
+        case 'de':
+        case 'de-DE':
+            volumeName = volumeNames[0];
+            break;
+        case 'en':
+        case 'en-US':
+        case 'en-GB':
+            volumeName = volumeNames[1];
+            break;
+        case 'fr':
+        case 'fr-FR':
+            volumeName = volumeNames[1];
+            break;
+        case 'jp':
+        case 'ja-JP':
+            volumeName = volumeNames[2];
+            break;
+        case 'es':
+        case 'es-ES':
+            volumeName = volumeNames[3];
+            break;
+        default:
+            volumeName = volumeNames[1];
+            break;
+    }
+    break; // exit the for loop after the first iteration
 }
 
-text.textContent = volumeName;
+// If no name, whatever why, was defined before it is been set to a standard value
+if(volumeName == undefined || volumeName == null || volumeName.length == 0) volumeName = volumeNames[1]
 
+
+text.textContent = volumeName;
 
 
 button.appendChild(text);
