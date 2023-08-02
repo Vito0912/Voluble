@@ -1,6 +1,9 @@
 // Create the volume control element
 let volumeControl = document.createElement('div');
 // Add classes to the volume control element for styling
+volumeControl.style.display = 'flex';
+volumeControl.style.flexDirection = 'column';
+volumeControl.style.alignItems = 'center';
 volumeControl.classList.add('bc-col-responsive', 'adblCloudPlayerVolumeControl', 'bc-text-center', 'bc-col-3')
 
 // Add the button
@@ -89,7 +92,7 @@ let sliderContainer = document.createElement('div');
 sliderContainer.style.display = 'none';
 sliderContainer.style.flexDirection = 'column';
 sliderContainer.style.alignItems = 'center';
-sliderContainer.style.transform = 'rotate(-90deg) translateX(120%) translateY(-25%)';
+sliderContainer.style.transform = 'rotate(-90deg) translateX(120%)';
 sliderContainer.style.width = '100px'
 sliderContainer.style.height= '40px'
 sliderContainer.style.cursor = 'pointer';
@@ -121,6 +124,18 @@ style.textContent = `
     width:9px;
     -webkit-appearance:none;
   }
+
+  .volume-range[type=range]::-webkit-slider-thumb {
+    background: #f7991c;
+    box-shadow:-1px 0 2px 0 rgba(0,0,0,.5);
+    border:0 solid 0;
+    border-radius:9px;
+    border-color: #f7991c;
+    cursor:pointer;
+    height:9px;
+    width:9px;
+    -webkit-appearance:none;
+    }
 `;
 document.head.appendChild(style);
 
